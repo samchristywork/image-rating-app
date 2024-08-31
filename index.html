@@ -6,6 +6,7 @@
     <title>Image Rating App</title>
 
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -14,6 +15,10 @@
       <img id="slideshow" class="main-image" src="" alt="Image Slideshow" />
       <div class="image-number" id="imageNumber"></div>
       <div class="image-name" id="imageName"></div>
+    </div>
+    <div id="panel"></div>
+    <div class="text-box" style="height: calc(100vh - 2rem); left: 1rem">
+      <textarea spellcheck="false" id="leftBox"></textarea>
     </div>
   </body>
 </html>

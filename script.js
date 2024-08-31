@@ -8,6 +8,24 @@ function showImage(index) {
   document.getElementById("imageNumber").innerText =
     `Image ${index + 1} of ${images.length}`;
   document.getElementById("imageName").innerText = `${images[index]}`;
+
+  let imgURL = images[index];
+  fetch(imgURL)
+    .then((response) => response.blob())
+    .then((blob) => {
+      let imgFile = new File([blob], "myImage.jpg");
+
+      EXIF.getData(imgFile, function () {
+        let allMetaData = EXIF.getAllTags(this);
+
+        // Stringify without indent
+        //leftBox.value=JSON.stringify(allMetaData);
+
+        // Stringify with indent
+        leftBox.value = JSON.stringify(allMetaData, null, 2);
+      });
+    })
+    .catch((error) => console.error("Error fetching image:", error));
 }
 
 function nextImage() {
