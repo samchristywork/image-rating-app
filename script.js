@@ -20,6 +20,65 @@ function prevImage() {
   showImage(currentIndex);
 }
 
+function createSquares() {
+  let panel = document.getElementById("panel");
+  panel.innerHTML = "";
+
+  for (let i = 0; i < images.length; i++) {
+    let square = document.createElement("div");
+    square.classList.add("square");
+
+    if (i === currentIndex) {
+      square.classList.add("selected");
+    }
+
+    let item = ratings[i];
+
+    let directoryName = images[i].split("/")[1];
+    square.innerText = directoryName[0];
+
+    if (!item) {
+    } else if (item === "no") {
+      square.classList.add("red");
+    } else if (item === "maybe") {
+      square.classList.add("yellow");
+    } else if (item === "yes") {
+      square.classList.add("green");
+    } else if (item in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]) {
+      square.classList.add("grey");
+      square.innerText = item;
+    } else {
+      console.log(item);
+      square.classList.add("grey");
+    }
+
+    square.onclick = function () {
+      currentIndex = i;
+      showImage(i);
+      createSquares();
+    };
+
+    panel.appendChild(square);
+  }
+
+  let customLabelRight = document.getElementById("customLabelRight");
+  let percent = Math.round(
+    (Object.keys(ratings).length / images.length) * 100,
+  );
+  let total = Object.keys(ratings).length;
+  customLabelRight.innerText = `${percent}% Complete (${total}/${images.length})`;
+
+  let customLabelLeft = document.getElementById("customLabelLeft");
+
+  let array = Object.keys(ratings).map((e) => ratings[e]);
+  let yes = array.filter((item) => item === "yes").length;
+  let maybe = array.filter((item) => item === "maybe").length;
+  let no = array.filter((item) => item === "no").length;
+  customLabelLeft.innerText = `${yes}/${maybe}/${no}/${images.length - total}`;
+
+  document.querySelector("#rightBox").value = JSON.stringify(ratings);
+}
+
 document.addEventListener("keydown", function (event) {
   if (event.key === "ArrowUp") {
     ratings[currentIndex] = "yes";
@@ -33,6 +92,8 @@ document.addEventListener("keydown", function (event) {
   } else if (event.key === "ArrowLeft") {
     prevImage();
   }
+
+  createSquares();
 });
 
 window.onload = function () {
@@ -40,6 +101,7 @@ window.onload = function () {
     .then((response) => response.json())
     .then((data) => {
       images=data;
+      createSquares();
       showImage(currentIndex);
     });
 }
