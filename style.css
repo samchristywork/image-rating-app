@@ -125,3 +125,123 @@ textarea {
   overflow-wrap: normal;
   overflow-x: scroll;
 }
+
+.custom-label-left {
+  position: absolute;
+  left: 30rem;
+  bottom: 1rem;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.custom-label-right {
+  position: absolute;
+  right: 30rem;
+  bottom: 1rem;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(-5deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+}
+
+.fade-out {
+  position: absolute;
+  font-size: 20rem;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity ease-in-out;
+  pointer-events: none;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  /*animation: wiggle 2.0s ease-in-out infinite;*/
+}
+
+#bruce {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  z-index: -1;
+}
+
+.rainbow-text {
+  background: linear-gradient(
+    135deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.green-text {
+  background: linear-gradient(
+    135deg,
+    rgb(0, 127, 0),
+    rgb(0, 255, 0),
+    rgb(0, 127, 0)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.yellow-text {
+  background: linear-gradient(
+    135deg,
+    rgb(127, 127, 0),
+    rgb(255, 255, 0),
+    rgb(127, 127, 0)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.red-text {
+  background: linear-gradient(
+    135deg,
+    rgb(127, 0, 0),
+    rgb(255, 0, 0),
+    rgb(127, 0, 0)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.rainbow {
+  background: linear-gradient(
+    135deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  opacity: 25%;
+}
