@@ -133,12 +133,21 @@ document.addEventListener("keydown", function (event) {
     displayThisText("NO!", "red-text", 0.5);
     ratings[currentIndex] = "no";
     nextImage();
+  } else if (event.key === "r") {
+    randomImage();
   } else if (event.key === "ArrowLeft") {
     prevImage();
   }
 
   createSquares();
 });
+
+function randomImage() {
+  let randomIndex = Math.floor(Math.random() * images.length);
+  currentIndex = randomIndex;
+  showImage(randomIndex);
+  createSquares();
+}
 
 window.onload = function () {
   fetch("manifest.json")
