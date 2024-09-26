@@ -1,6 +1,7 @@
 let images = [];
 let ratings = {};
 let currentIndex = Object.keys(ratings).length;
+currentIndex = 0;
 
 function showImage(index) {
   let imgElement = document.getElementById("slideshow");
@@ -97,14 +98,39 @@ function createSquares() {
   document.querySelector("#rightBox").value = JSON.stringify(ratings);
 }
 
+function displayThisText(text, color, durationInSeconds) {
+  let textElement = document.createElement("div");
+  textElement.className = "fade-out";
+  textElement.textContent = text;
+  textElement.style.color = color;
+  textElement.classList.add(color);
+  textElement.style.top = "50%";
+  textElement.style.left = "50%";
+  textElement.style.transform = "translate(-50%, -50%)";
+  textElement.style.transitionDuration = `${durationInSeconds}s`;
+
+  document.body.appendChild(textElement);
+
+  setTimeout(() => {
+    textElement.style.opacity = "0";
+  }, 500);
+
+  setTimeout(() => {
+    document.body.removeChild(textElement);
+  }, durationInSeconds * 5000);
+}
+
 document.addEventListener("keydown", function (event) {
   if (event.key === "ArrowUp") {
+    displayThisText("YES!", "green-text", 0.75);
     ratings[currentIndex] = "yes";
     nextImage();
   } else if (event.key === "ArrowRight") {
+    displayThisText("MAYBE!", "yellow-text", 0.5);
     ratings[currentIndex] = "maybe";
     nextImage();
   } else if (event.key === "ArrowDown") {
+    displayThisText("NO!", "red-text", 0.5);
     ratings[currentIndex] = "no";
     nextImage();
   } else if (event.key === "ArrowLeft") {
